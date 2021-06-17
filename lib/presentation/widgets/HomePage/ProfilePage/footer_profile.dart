@@ -30,11 +30,12 @@ Widget footerProfile(
                 child: CircularProgressIndicator(),
               );
             } else {
+              final size = snapshot.data!.size;
               return Container(
                 height: MediaQuery.of(context).size.height * 0.5,
                 width: MediaQuery.of(context).size.width,
                 child: GridView.builder(
-                  itemCount: snapshot.data!.size,
+                  itemCount: size,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3),
                   itemBuilder: (context, index) {
@@ -43,9 +44,13 @@ Widget footerProfile(
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserPosts()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserPosts(
+                                userUid: context.read<LoginCubit>().state.uid,
+                              ),
+                            ),
+                          );
                         },
                         child: Container(
                           child: FittedBox(
@@ -54,8 +59,9 @@ Widget footerProfile(
                             child: StreamBuilder<DocumentSnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('posts')
-                                    .doc(
-                                        snapshot.data!.docs.elementAt(index).id)
+                                    .doc(snapshot.data!.docs
+                                        .elementAt(size - index - 1)
+                                        .id)
                                     .snapshots(),
                                 builder: (context, snapshot1) {
                                   if (snapshot1.connectionState ==
