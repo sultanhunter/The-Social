@@ -33,7 +33,9 @@ class UserPosts extends StatelessWidget {
               fontSize: 16,
             )),
       ),
-      body: Container(),
+      body: Container(
+        color: kRedColor,
+      ),
     );
   }
 }
