@@ -69,6 +69,12 @@ class PostimageuploadCubit extends Cubit<PostimageuploadState> {
 
   Future deletePost(
       BuildContext context, String postId, String imageLocation) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(context.read<LoginCubit>().state.uid)
+        .collection('posts')
+        .doc(postId)
+        .delete();
     await FirebaseFirestore.instance.collection('posts').doc(postId).delete();
     await FirebaseStorage.instance.ref().child(imageLocation).delete();
     FirebaseFirestore.instance
@@ -158,5 +164,21 @@ class PostimageuploadCubit extends Cubit<PostimageuploadState> {
     Timestamp time = timedata;
     DateTime dateTime = time.toDate();
     return timeago.format(dateTime);
+  }
+
+  Future initiateChat(
+      String senderUid, String receiverUid, dynamic data) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderUid)
+        .collection('chats')
+        .doc(receiverUid)
+        .set(data);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(receiverUid)
+        .collection('chats')
+        .doc(senderUid)
+        .set(data);
   }
 }
