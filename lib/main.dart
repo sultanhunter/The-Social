@@ -8,7 +8,7 @@ import 'package:the_social/logic/cubits/imagePickUpload/cubit/imagepickupload_cu
 import 'package:the_social/logic/cubits/logIn/login_cubit.dart';
 import 'package:the_social/logic/cubits/pageView/cubit/pageview_cubit.dart';
 import 'package:the_social/presentation/routes/routes.dart';
-import 'package:the_social/presentation/screens/splashScreen/splashScreen.dart';
+import 'package:the_social/presentation/screens/SplashScreen/splashScreen.dart';
 import './constants/Constantcolors.dart';
 
 void main() {

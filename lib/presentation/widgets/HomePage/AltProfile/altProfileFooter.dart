@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_social/constants/Constantcolors.dart';
-import 'package:the_social/logic/cubits/logIn/login_cubit.dart';
 import 'package:the_social/presentation/screens/HomePage/UserPosts/userPosts.dart';
 
 Widget altProfileFooter(

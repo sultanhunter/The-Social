@@ -7,7 +7,6 @@ import 'package:the_social/logic/cubits/Feed/cubit/postimageupload_cubit.dart';
 import 'package:the_social/logic/cubits/logIn/login_cubit.dart';
 import 'package:the_social/logic/cubits/pageView/cubit/pageview_cubit.dart';
 import 'package:the_social/presentation/screens/HomePage/AltProfile/altProfile.dart';
-import 'package:the_social/presentation/screens/HomePage/Profile/profile.dart';
 
 altProfileFollowingSheet(
     BuildContext context, AsyncSnapshot<DocumentSnapshot> userSnapshot) {

@@ -4,15 +4,24 @@ import 'package:the_social/constants/Constantcolors.dart';
 import 'package:the_social/logic/cubits/chat/Typing/bloc/typing_bloc.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
-
   @override
   _ChatPageState createState() => _ChatPageState();
 }
 
-final TextEditingController _messageController = TextEditingController();
-
 class _ChatPageState extends State<ChatPage> {
+  late TextEditingController _messageController;
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _messageController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,13 +54,19 @@ class _ChatPageState extends State<ChatPage> {
                       child: TextField(
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        cursorColor: Colors.black,
+                        cursorColor: kDarkColor,
+                        style: TextStyle(
+                            color: kDarkColor,
+                            fontSize: 16,
+                            decoration: TextDecoration.none),
                         decoration: InputDecoration(
-                            hintText: 'Enter a message',
-                            hintStyle: TextStyle(color: kDarkColor),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            contentPadding: EdgeInsets.all(2)),
+                          hintText: 'Enter a message',
+                          hintStyle: TextStyle(color: kDarkColor),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.all(2),
+                        ),
                         controller: _messageController,
                         onChanged: (value) {
                           context

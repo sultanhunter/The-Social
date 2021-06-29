@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:the_social/constants/Constantcolors.dart';
-import 'package:the_social/presentation/screens/HomePage/Chatroom/chatPage.dart';
 
 class CreateChatSheet extends StatelessWidget {
   const CreateChatSheet({Key? key}) : super(key: key);
@@ -25,8 +24,7 @@ class CreateChatSheet extends StatelessWidget {
               } else {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => ChatPage()));
+                    Navigator.popAndPushNamed(context, '/chatPage');
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
