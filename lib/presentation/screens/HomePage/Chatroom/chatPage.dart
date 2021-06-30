@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_social/constants/Constantcolors.dart';
-import 'package:the_social/logic/cubits/chat/Typing/bloc/typing_bloc.dart';
+import 'package:the_social/logic/blocs/typing/bloc/typing_bloc.dart';
+import 'package:the_social/logic/cubits/chat/chatcreate_cubit.dart';
+import 'package:the_social/logic/cubits/logIn/login_cubit.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -24,6 +27,9 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final String receiverUid =
+        context.read<ChatcreateCubit>().state.receiverUid;
+    final String loggedInUserUid = context.read<LoginCubit>().state.uid;
     return Scaffold(
       backgroundColor: kDarkColor,
       appBar: AppBar(
@@ -79,7 +85,14 @@ class _ChatPageState extends State<ChatPage> {
                       builder: (context, state) {
                         if (state.typedMessage.isNotEmpty) {
                           return TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context
+                                    .read<ChatcreateCubit>()
+                                    .createChat(loggedInUserUid, receiverUid, {
+                                  'message': _messageController.text,
+                                  'time': Timestamp.now(),
+                                });
+                              },
                               child: Text(
                                 'Send',
                                 style: TextStyle(

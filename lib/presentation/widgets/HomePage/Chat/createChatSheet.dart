@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_social/constants/Constantcolors.dart';
+import 'package:the_social/logic/cubits/chat/chatcreate_cubit.dart';
 
 class CreateChatSheet extends StatelessWidget {
-  const CreateChatSheet({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,44 +22,51 @@ class CreateChatSheet extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.popAndPushNamed(context, '/chatPage');
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final receiverUid =
+                          snapshot.data!.docs.elementAt(index).get('useruid');
+                      return GestureDetector(
+                        onTap: () {
+                          context
+                              .read<ChatcreateCubit>()
+                              .userSelected(receiverUid);
+                          Navigator.popAndPushNamed(context, '/chatPage');
+                        },
+                        child: Container(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                snapshot.data!.docs
+                                    .elementAt(index)
+                                    .get('userimage'),
+                              ),
+                            ),
+                            title: Text(
                               snapshot.data!.docs
                                   .elementAt(index)
-                                  .get('userimage'),
+                                  .get('username'),
+                              style: TextStyle(
+                                  color: kBlueColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0),
+                            ),
+                            subtitle: Text(
+                              snapshot.data!.docs
+                                  .elementAt(index)
+                                  .get('useremail'),
+                              style: TextStyle(
+                                  color: kWhiteColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.0),
                             ),
                           ),
-                          title: Text(
-                            snapshot.data!.docs
-                                .elementAt(index)
-                                .get('username'),
-                            style: TextStyle(
-                                color: kBlueColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0),
-                          ),
-                          subtitle: Text(
-                            snapshot.data!.docs
-                                .elementAt(index)
-                                .get('useremail'),
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.0),
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data!.size,
-                    ),
+                        ),
+                      );
+                    },
+                    itemCount: snapshot.data!.size,
                   ),
                 );
               }

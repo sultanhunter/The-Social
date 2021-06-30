@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_social/constants/Constantcolors.dart';
 import 'package:the_social/logic/cubits/Feed/cubit/postimageupload_cubit.dart';
-import 'package:the_social/logic/cubits/chat/Typing/bloc/typing_bloc.dart';
+import 'package:the_social/logic/cubits/chat/chatcreate_cubit.dart';
 import 'package:the_social/logic/cubits/imagePickUpload/cubit/imagepickupload_cubit.dart';
 import 'package:the_social/logic/cubits/logIn/login_cubit.dart';
 import 'package:the_social/logic/cubits/pageView/cubit/pageview_cubit.dart';
 import 'package:the_social/presentation/routes/routes.dart';
 import 'package:the_social/presentation/screens/SplashScreen/splashScreen.dart';
 import './constants/Constantcolors.dart';
+import 'logic/blocs/typing/bloc/typing_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,6 +52,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<TypingBloc>(
           create: (context) => TypingBloc(),
         ),
+        BlocProvider<ChatcreateCubit>(create: (context) => ChatcreateCubit())
       ],
       child: MaterialApp(
         onGenerateRoute: _router.onGenerateRoute,
