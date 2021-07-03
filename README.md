@@ -7,3 +7,6 @@ Like and Comment on posts.
 Edit and Delete posts.
 Profile Page containing user info, like latest posts, number of followers etc.
 Chat feature.
+
+
+[apk file](https://github.com/sultanhunter/The-Social/blob/main/app-release.apk)
