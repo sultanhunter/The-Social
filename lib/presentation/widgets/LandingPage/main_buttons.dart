@@ -58,13 +58,13 @@ class MainButton extends StatelessWidget {
               icon: EvaIcons.google,
               borderColor: kRedColor,
             ),
-            Buttons(
-              ontap: () {
-                context.read<LoginCubit>().signOutWithGoogle();
-              },
-              icon: EvaIcons.facebook,
-              borderColor: kBlueColor,
-            ),
+            // Buttons(
+            //   ontap: () {
+            //     context.read<LoginCubit>().signOutWithGoogle();
+            //   },
+            //   icon: EvaIcons.facebook,
+            //   borderColor: kBlueColor,
+            // ),
           ],
         ),
       ),

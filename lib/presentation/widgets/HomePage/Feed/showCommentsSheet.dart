@@ -18,35 +18,38 @@ showCommentsSheet(BuildContext context, String postId) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.75,
           width: MediaQuery.of(context).size.width,
-          child: Stack(
+          child: Column(
             children: [
-              Column(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 150.0),
+                child: Divider(
+                  thickness: 4.0,
+                  color: kWhiteColor,
+                ),
+              ),
+              Container(
+                width: 100,
+                decoration: BoxDecoration(
+                  border: Border.all(color: kWhiteColor),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Center(
+                  child: Text(
+                    'Comments',
+                    style: TextStyle(
+                        color: kBlueColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 150.0),
-                    child: Divider(
-                      thickness: 4.0,
-                      color: kWhiteColor,
-                    ),
-                  ),
                   Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kWhiteColor),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Comments',
-                        style: TextStyle(
-                            color: kBlueColor,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.6,
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.1),
+                    height: MediaQuery.of(context).size.height * 0.7 -
+                        MediaQuery.of(context).viewInsets.bottom,
                     width: MediaQuery.of(context).size.width,
                     child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
@@ -73,6 +76,7 @@ showCommentsSheet(BuildContext context, String postId) {
                             children: [
                               Expanded(
                                 child: ListView.builder(
+                                  reverse: true,
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
@@ -242,55 +246,57 @@ showCommentsSheet(BuildContext context, String postId) {
                       },
                     ),
                   ),
-                ],
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.67,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.83,
-                        height: 50.0,
-                        child: TextField(
-                          controller: _commentController,
-                          style: TextStyle(
-                            color: kWhiteColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: InputDecoration(
-                            hintText: 'Add a Comment...',
-                            hintStyle: TextStyle(
-                              color: kWhiteColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.61 -
+                        MediaQuery.of(context).viewInsets.bottom,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 10),
+                            width: MediaQuery.of(context).size.width * 0.83,
+                            height: 50.0,
+                            child: TextField(
+                              controller: _commentController,
+                              style: TextStyle(
+                                color: kWhiteColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textCapitalization: TextCapitalization.sentences,
+                              decoration: InputDecoration(
+                                hintText: 'Add a Comment...',
+                                hintStyle: TextStyle(
+                                  color: kWhiteColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          FloatingActionButton(
+                            backgroundColor: kGreenColor,
+                            onPressed: () {
+                              context
+                                  .read<PostimageuploadCubit>()
+                                  .addComment(
+                                      context, postId, _commentController.text)
+                                  .whenComplete(() {
+                                _commentController.clear();
+                              });
+                            },
+                            child: Icon(
+                              FontAwesomeIcons.comment,
+                              color: kWhiteColor,
+                            ),
+                          )
+                        ],
                       ),
-                      FloatingActionButton(
-                        backgroundColor: kGreenColor,
-                        onPressed: () {
-                          context
-                              .read<PostimageuploadCubit>()
-                              .addComment(
-                                  context, postId, _commentController.text)
-                              .whenComplete(() {
-                            _commentController.clear();
-                          });
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.comment,
-                          color: kWhiteColor,
-                        ),
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              )
+                ],
+              ),
             ],
           ),
           decoration: BoxDecoration(

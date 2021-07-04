@@ -72,13 +72,12 @@ logInSheet(BuildContext context) {
                         .read<LoginCubit>()
                         .logIntoAccount(
                             emailController.text, passController.text)
-                        .whenComplete(() {
+                        .then((value) {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => HomePage()),
                           ModalRoute.withName('/landing'));
                     });
-                  } else {
                     showDialog(
                       context: context,
                       builder: (context) {

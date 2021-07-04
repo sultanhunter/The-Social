@@ -21,35 +21,38 @@ emailAuthSheet(BuildContext context) {
                   color: kWhiteColor,
                 ),
               ),
-              PassWordLessSignin(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MaterialButton(
-                    color: kBlueColor,
-                    onPressed: () {
-                      logInSheet(context);
-                    },
-                    child: Text(
-                      'Log In',
-                      style: kButtonTextStyle,
+              // PassWordLessSignin(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MaterialButton(
+                      color: kBlueColor,
+                      onPressed: () {
+                        logInSheet(context);
+                      },
+                      child: Text(
+                        'Log In',
+                        style: kButtonTextStyle,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    color: kRedColor,
-                    onPressed: () {
-                      signUpSheet(context);
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: kButtonTextStyle,
+                    MaterialButton(
+                      color: kRedColor,
+                      onPressed: () {
+                        signUpSheet(context);
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: kButtonTextStyle,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.5,
+          // height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: kBlueGreyColor,
