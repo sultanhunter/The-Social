@@ -34,6 +34,4 @@ Chat feature.<br><br>
 
 [Youtube Video Link](https://youtu.be/pGj6G2ghOw8)
 
-
-[apk file](https://github.com/sultanhunter/The-Social/blob/main/app-release.apk)
 >>>>>>> 11c417fc55b933363f1979860e7319be2f7378a3
