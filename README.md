@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-=======
-# the_social
+# The-Social
 
 A Social Media app build with Flutter and Firebase.<br><br>
 ![Landing](https://github.com/sultanhunter/The-Social/blob/main/assets/images/oie_3154451RrIYHu4h.png)<br>
